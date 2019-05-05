@@ -29,7 +29,7 @@ db = firestore.client()
 #Get Collection
 doc_ref = db.collection('Detector').document('gas')
 localtime = time.asctime(time.localtime(time.time()))
-temp = '最後監測時間為 =>'+ localtime + '\n' 
+temp = '監測時間 => '+ localtime + '\n' 
 try:
     doc = doc_ref.get()
 # 透過 to_dict()將文件轉為dictionary
