@@ -22,6 +22,5 @@ try:
 # print("文件內容為：{}".format(doc.to_dict()))
 # print(temp)
 except:
-# print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
-#print(temp)
-
+    print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
+# print(temp)
