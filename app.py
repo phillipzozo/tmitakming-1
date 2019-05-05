@@ -33,13 +33,14 @@ def callback():
 #字串匹配 用來是否呼叫沫兒的
 import re
 MoReply = False  #沫兒未確認匹配不回覆訊息
-if re.match('沫兒',event.message.text):
-    MoReply = True #沫兒確認匹配成功
+
 
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    if re.match('沫兒',event.message.text):
+        MoReply = True #沫兒確認匹配成功
     message = TextSendMessage(text='沫兒收到您的回覆囉!')
     # message = TextSendMessage(text=event.message.text)
     if MoReply == True:
