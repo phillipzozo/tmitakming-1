@@ -42,6 +42,8 @@ def handle_message(event):
     if re.match('沫兒',event.message.text):
         MoReply = True #沫兒確認匹配成功
     message = TextSendMessage(text='沫兒收到您的回覆囉!')
+    if re.search('我帥嗎',event.message.text):
+        message = TextSendMessage(text='沫兒覺得勝舢最帥了!')
     # message = TextSendMessage(text=event.message.text)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
