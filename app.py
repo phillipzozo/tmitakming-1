@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
-from . import cusFirebase
+from cusFirebase import *
 
 app = Flask(__name__)
 
