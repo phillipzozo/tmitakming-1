@@ -84,21 +84,12 @@ def handle_message(event):
     if re.search('回報車內狀況',event.message.text):
         message = TextSendMessage(text=temp)
     # message = TextSendMessage(text=event.message.text)
-    
     if re.search('profile',event.message.text):
-        if isinstance(event.source, SourceUser):
-            profile = line_bot_api.get_profile(event.source.user_id)
-            line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(text='Display name: ' + profile.display_name),
-                    TextSendMessage(text='Status message: ' + profile.status_message)
-                ]
-                )
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="Bot can't use profile API without user ID"))
-    
+        user_id = event.source.user_id
+        message = TextSendMessage(text=user_id)
+    if re.search('profile_group', event.message.text):
+        user_id = event.source.group_id
+        message = TextSendMessage(text=group_id)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
