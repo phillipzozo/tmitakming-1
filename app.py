@@ -79,12 +79,7 @@ def handle_message(event):
 
     if text == 'profile':
         user_id = event.source.user_id
-        line_bot_api.reply_message(
-            event.reply_token, [
-                TextSendMessage(text='Display name: ' + profile.display_name),
-                TextSendMessage(text='Status message: ' + profile.status_message)
-            ]
-        )
+        message = TextSendMessage(text=user_id)
        
 
 
