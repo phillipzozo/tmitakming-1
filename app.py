@@ -83,8 +83,7 @@ def handle_message(event):
         profile = line_bot_api.get_profile('')
         #print(profile.display_name)
         #print(profile.user_id)
-        message = TextSendMessage(
-            text=profile.display_name+' '+profile.user_id)
+        message = TextSendMessage(text=profile.display_name+' '+profile.user_id)
     if re.search('回報車內狀況',event.message.text):
         message = TextSendMessage(text=temp)
     if re.search('測試',event.message.text):
