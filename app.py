@@ -67,6 +67,8 @@ def callback():
 import re
 MoReply = False  #沫兒未確認匹配不回覆訊息
 
+to = "U59f95fe4a4acf87b3433b626f41679b8" #userID 推播用
+
 
 
 # 處理訊息
