@@ -88,10 +88,10 @@ def handle_message(event):
         user_id = event.source.user_id
         message = TextSendMessage(text=user_id)
     if re.search('profile_group', event.message.text):
-        user_id = event.source.group_id
+        group_id = event.source.group_id
         message = TextSendMessage(text=group_id)
     if re.search('profile_room', event.message.text):
-        user_id = event.source.room_id
+        room_id = event.source.room_id
         message = TextSendMessage(text=room_id)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
