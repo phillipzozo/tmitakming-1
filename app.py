@@ -74,16 +74,31 @@ to = "U59f95fe4a4acf87b3433b626f41679b8" #userID 推播用
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
+    text = event.message.text
+
+    if text == 'profile':
+        if isinstance(event.source, SourceUser):
+            profile = line_bot_api.get_profile(event.source.user_id)
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text='Display name: ' + profile.display_name),
+                    TextSendMessage(text='Status message: ' + profile.status_message)
+                ]
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Bot can't use profile API without user ID"))
+
+
+
+
     if re.match('沫兒',event.message.text):
         MoReply = True #沫兒確認匹配成功
     message = TextSendMessage(text='沫兒收到您的回覆囉!')
     if re.search('我帥嗎',event.message.text):
         message = TextSendMessage(text='沫兒覺得勝舢最帥了!')
-    if re.search('傳回ID', event.message.text):
-        profile = line_bot_api.get_profile('event.source.user_id')
-        #print(profile.display_name)
-        #print(profile.user_id)
-        message = TextSendMessage(text=profile.display_name+' '+profile.user_id)
     if re.search('回報車內狀況',event.message.text):
         message = TextSendMessage(text=temp)
     if re.search('測試',event.message.text):
