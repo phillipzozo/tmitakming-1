@@ -85,20 +85,8 @@ def handle_message(event):
         message = TextSendMessage(text=temp)
     # message = TextSendMessage(text=event.message.text)
     if re.search('profile_user',event.message.text):
-        if isinstance(event.source, SourceUser):
-            profile = line_bot_api.get_profile(event.source.user_id)
-            line_bot_api.reply_message(
-                event.reply_token, [
-                    TextSendMessage(text='Display name: ' +
-                                    profile.display_name),
-                    TextSendMessage(text='Status message: ' +
-                                    profile.status_message)
-                ]
-            )
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="Bot can't use profile API without user ID"))
+        user_id = event.source.user_id
+        message = TextSendMessage(text=user_id)
     if re.search('profile_group', event.message.text):
         group_id = event.source.group_id
         message = TextSendMessage(text=group_id)
