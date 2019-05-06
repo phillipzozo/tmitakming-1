@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+from linebot.exceptions import LineBotApiError
 
 import os
 app = Flask(__name__)
@@ -79,6 +79,13 @@ def handle_message(event):
         message = TextSendMessage(text='沫兒覺得勝舢最帥了!')
     if re.search('回報車內狀況',event.message.text):
         message = TextSendMessage(text=temp)
+    if re.search('測試',event.message.text):
+        #文字訊息
+        try:
+            line_bot_api.push_message(to, TextSendMessage(text='測試push'))
+        except LineBotApiError as e:
+    # error handle
+            raise e
     # message = TextSendMessage(text=event.message.text)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
