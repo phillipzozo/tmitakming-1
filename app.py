@@ -87,6 +87,9 @@ def handle_message(event):
     if re.search('profile',event.message.text):
         user_id = event.source.user_id
         message = TextSendMessage(text=user_id)
+    if re.search('profile_group', event.message.text):
+        user_id = event.source.group_id
+        message = TextSendMessage(text=group_id)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
