@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
-
+from . import checkkeyword
 import os
 app = Flask(__name__)
 
