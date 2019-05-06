@@ -75,16 +75,7 @@ to = "U59f95fe4a4acf87b3433b626f41679b8" #userID 推播用
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 
-    text = event.message.text
-
-    if text == 'profile':
-        user_id = event.source.user_id
-        message = TextSendMessage(text=user_id)
-       
-
-
-
-
+      
     if re.match('沫兒',event.message.text):
         MoReply = True #沫兒確認匹配成功
     message = TextSendMessage(text='沫兒收到您的回覆囉!')
@@ -93,6 +84,9 @@ def handle_message(event):
     if re.search('回報車內狀況',event.message.text):
         message = TextSendMessage(text=temp)
     # message = TextSendMessage(text=event.message.text)
+    if re.search('profile'):
+        user_id = event.source.user_id
+        message = TextSendMessage(text=user_id)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
