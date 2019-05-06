@@ -84,7 +84,7 @@ def handle_message(event):
     if re.search('回報車內狀況',event.message.text):
         message = TextSendMessage(text=temp)
     # message = TextSendMessage(text=event.message.text)
-    if re.search('profile'):
+    if re.search('profile',event.message.text):
         user_id = event.source.user_id
         message = TextSendMessage(text=user_id)
     if MoReply == True:
