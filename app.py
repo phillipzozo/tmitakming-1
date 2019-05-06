@@ -8,7 +8,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
-from . import checkkeyword
+
 import os
 app = Flask(__name__)
 
@@ -67,14 +67,18 @@ def callback():
 import re
 MoReply = False  #沫兒未確認匹配不回覆訊息
 
-message = ""
 
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    msg = checkkeyword(event)
-    message = TextSendMessage(text = msg)
+    if re.match('沫兒',event.message.text):
+        MoReply = True #沫兒確認匹配成功
+    message = TextSendMessage(text='沫兒收到您的回覆囉!')
+    if re.search('我帥嗎',event.message.text):
+        message = TextSendMessage(text='沫兒覺得勝舢最帥了!')
+    if re.search('回報車內狀況',event.message.text):
+        message = TextSendMessage(text=temp)
     # message = TextSendMessage(text=event.message.text)
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
@@ -85,12 +89,3 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
 
-def checkkeyword(event):
-    if re.match('沫兒', event.message.text):
-        MoReply = True  # 沫兒確認匹配成功
-    msg = '沫兒收到您的回覆囉!'
-    if re.search('我帥嗎', event.message.text):
-        msg = '沫兒覺得勝舢最帥了!'
-    if re.search('回報車內狀況',event.message.text):
-        msg = temp
-    return msg
