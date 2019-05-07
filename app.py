@@ -120,8 +120,9 @@ def job():
 schedule.every().minute.do(job)
 
 #while True:
- #   schedule.run_pending()
-  #  time.sleep(1)
+    schedule.run_pending()
+    time.sleep(1)
+    handle_message(event)
 
 
 
