@@ -76,16 +76,7 @@ MoReply = False  #沫兒未確認匹配不回覆訊息
 
 to = "U59f95fe4a4acf87b3433b626f41679b8" #userID 推播用
 
-def pushtime():
-      line_bot_api.push_message('Cd28e03928239ba4bfb9ba96f758861d4', TextSendMessage(
-          text="整點報時功能開啟。"))
-      line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
-          text="整點報時功能開啟。"))
-def tkon():
-    tstart = time.time()
-    if tstart % 10 == 0:
-        pushtime()
-#def tkoff():
+
 
 
 
@@ -128,11 +119,6 @@ def job():
         line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text="沫兒整點報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
 
 
-schedule.every(10).seconds.do(job)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
 
 
 
