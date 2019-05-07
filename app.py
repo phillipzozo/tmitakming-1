@@ -12,18 +12,19 @@ from linebot.exceptions import LineBotApiError
 import os
 app = Flask(__name__)
 
-import time
-import pytz  #改時區用
-import datatime
-
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
+import time
+import datetime
 
-
-
+#取得時間後加8的偏移 UTC
+dt = datetime.utcnow()
+dt = dt.replace(tzinfo=timezone.utc)
+tzutc_8 = timezone(timedelta(hours=8))
+local_dt = dt.astimezone(tzutc_8)
 # 引用私密金鑰
 # path/to/serviceAccount.json 請用自己存放的路徑
 cred = credentials.Certificate('serviceAccount.json')
@@ -47,8 +48,7 @@ except:
     print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
 # print(temp)
 
-os.environ['TZ'] = 'Asia/Taipei'
-zh = pytz.timezone('Asia/Taipei')
+
 
 
 # Channel Access Token
@@ -102,7 +102,7 @@ def handle_message(event):
         room_id = event.source.room_id
         message = TextSendMessage(text=room_id)
     if re.search('測試推播',event.message.text):
-        line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
+        line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=local_dt))
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
