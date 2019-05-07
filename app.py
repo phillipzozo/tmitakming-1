@@ -12,11 +12,18 @@ from linebot.exceptions import LineBotApiError
 import os
 app = Flask(__name__)
 
+import time
+import pytz  #改時區用
+import datatime
+
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-import time
+
+
+
+
 # 引用私密金鑰
 # path/to/serviceAccount.json 請用自己存放的路徑
 cred = credentials.Certificate('serviceAccount.json')
@@ -40,7 +47,8 @@ except:
     print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
 # print(temp)
 
-
+os.environ['TZ'] = 'Asia/Taipei'
+zh = pytz.timezone('Asia/Taipei')
 
 
 # Channel Access Token
