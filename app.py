@@ -102,7 +102,8 @@ def handle_message(event):
         room_id = event.source.room_id
         message = TextSendMessage(text=room_id)
     if re.search('測試推播',event.message.text):
-        line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+        line_bot_api.push_message(['Cd28e03928239ba4bfb9ba96f758861d4', 'C18d381b48c034f3de0af914fe1fe524f'], TextSendMessage(
+            text=(a+o).strftime("%Y-%m-%d %H:%M:%S")))
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
@@ -110,10 +111,11 @@ def handle_message(event):
 def job():
     a = datetime.datetime.today()
     o = datetime.timedelta(hours=8)
-    line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+    if int((a+o).strftime("%M")) == 0:
+        line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text="沫兒整點報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
 
 
-schedule.every(10).seconds.do(job)
+schedule.every().minute.do(job)
 
 while True:
     schedule.run_pending()
