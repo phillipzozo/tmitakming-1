@@ -94,7 +94,7 @@ def handle_message(event):
         room_id = event.source.room_id
         message = TextSendMessage(text=room_id)
     if re.search('測試推播',event.message.text):
-        line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text='這是主動丟訊息的'))
+        line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
