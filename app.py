@@ -19,6 +19,7 @@ from firebase_admin import firestore
 
 import time
 import datetime
+import schedule
 #時間偏移+8hour
 a = datetime.datetime.today()
 o = datetime.timedelta(hours=8)
@@ -77,6 +78,7 @@ to = "U59f95fe4a4acf87b3433b626f41679b8" #userID 推播用
 
 
 
+
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -104,6 +106,20 @@ def handle_message(event):
     if MoReply == True:
         line_bot_api.reply_message(event.reply_token, message)
     
+
+def job():
+    a = datetime.datetime.today()
+    o = datetime.timedelta(hours=8)
+    line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+
+
+schedule.every(10).seconds.do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+
 
 
 if __name__ == "__main__":
