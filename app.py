@@ -1,3 +1,4 @@
+import threading
 from flask import Flask, request, abort
 
 from linebot import (
@@ -82,9 +83,9 @@ def job():
     o = datetime.timedelta(hours=8)
   #  if int((a+o).strftime("%M")) == 0:
     line_bot_api.push_message('Cd28e03928239ba4bfb9ba96f758861d4', TextSendMessage(
-        text="沫兒整點報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+        text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
     line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
-        text="沫兒整點報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+        text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
 
 
 
@@ -131,4 +132,5 @@ def handle_message(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
+    timer = threading.Timer(5, job)
+    timer.start()
