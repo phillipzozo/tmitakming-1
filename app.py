@@ -100,7 +100,7 @@ def queryInsert(insertStr):
 test = []
 cc += 1  # 下一個流水號
 
-test = {'id': cc, 'CO2': 1100, 'Ethanol': 0.4, 'CO': 200, 'id': 1, 'PM2.5': 299,
+test = {'id': cc, 'CO2': 1100, 'Ethanol': 0.4, 'CO': 200, 'PM2.5': 299,
         'temperture': 30, 'humidity': 50, 'timestamp': (a+o).strftime("%Y-%m-%d %H:%M:%S")}
 #queryInsert(test)
 #query_Get()
