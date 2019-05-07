@@ -31,22 +31,26 @@ cred = credentials.Certificate('serviceAccount.json')
 
 # 初始化firebase，注意不能重複初始化
 firebase_admin.initialize_app(cred)
-
-# 初始化firestore
 db = firestore.client()
-#Get Collection
-doc_ref = db.collection('Detector').document('gas')
-localtime = time.asctime(time.localtime(time.time()))
-temp = '監測時間 => '+ localtime + '\n' 
-try:
-    doc = doc_ref.get()
-# 透過 to_dict()將文件轉為dictionary
-    temp +=  'PM2.5 => {}'.format(doc.to_dict()['PM2.5']) + '\n' + '二氧化碳 => {}'.format(doc.to_dict()['CO2']) + '\n' + '酒精 => {}'.format(doc.to_dict()['Ethanol']) + '\n' + '一氧化碳 => {}'.format(doc.to_dict()['CO']) + '\n'
-# print("文件內容為：{}".format(doc.to_dict()))
-# print(temp)
-except:
-    print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
-# print(temp)
+def query_Get():
+    # 初始化firestore
+    
+    #Get Collection
+    doc_ref = db.collection('Detector').document('gas')
+    localtime = time.asctime(time.localtime(time.time()))
+    temp = '監測時間 => '+ localtime + '\n' 
+    try:
+        doc = doc_ref.get()
+        # 透過 to_dict()將文件轉為dictionary
+        temp +=  'PM2.5 => {}'.format(doc.to_dict()['PM2.5']) + '\n' + '二氧化碳 => {}'.format(doc.to_dict()['CO2']) + '\n' + '酒精 => {}'.format(doc.to_dict()['Ethanol']) + '\n' + '一氧化碳 => {}'.format(doc.to_dict()['CO']) + '\n'
+        # print("文件內容為：{}".format(doc.to_dict()))
+        # print(temp)
+    except:
+        print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
+        # print(temp)
+
+#def query_insert():
+    
 
 
 
@@ -84,9 +88,9 @@ def job():
   #  if int((a+o).strftime("%M")) == 0:
     line_bot_api.push_message('Cd28e03928239ba4bfb9ba96f758861d4', TextSendMessage(
         text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
-    line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
-        text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
-    timer = threading.Timer(500, job)
+  #  line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
+    #    text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+    timer = threading.Timer(60, job)
     timer.start()
 
 
@@ -133,5 +137,5 @@ def handle_message(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-    timer = threading.Timer(1, job)
+    timer = threading.Timer(60, job)
     timer.start()
