@@ -86,7 +86,7 @@ def job():
         text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
     line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
         text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
-    timer = threading.Timer(5, job)
+    timer = threading.Timer(1000, job)
     timer.start()
 
 
@@ -133,5 +133,5 @@ def handle_message(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-    timer = threading.Timer(5, job)
+    timer = threading.Timer(1000, job)
     timer.start()
