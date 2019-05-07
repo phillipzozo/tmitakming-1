@@ -86,7 +86,8 @@ def job():
         text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
     line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
         text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
-
+    timer = threading.Timer(5, job)
+    timer.start()
 
 
 
