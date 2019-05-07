@@ -118,7 +118,7 @@ def handle_message(event):
         room_id = event.source.room_id
         message = TextSendMessage(text=room_id)
     if re.search('測試推播',event.message.text):
-        
+        job()
         line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text=(a+o).strftime("%Y-%m-%d %H:%M:%S")))
   
     if MoReply == True:
@@ -138,4 +138,4 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
     timer = threading.Timer(60, job)
     timer.start()
-    job()
+   
