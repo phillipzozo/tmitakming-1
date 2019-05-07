@@ -86,10 +86,9 @@ def job():
     a = datetime.datetime.today()
     o = datetime.timedelta(hours=8)
   #  if int((a+o).strftime("%M")) == 0:
-    line_bot_api.push_message('Cd28e03928239ba4bfb9ba96f758861d4', TextSendMessage(
-        text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
-  #  line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
-    #    text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+  #  line_bot_api.push_message('Cd28e03928239ba4bfb9ba96f758861d4', TextSendMessage(
+  #      text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
+    line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(text="報時~ 現在時間："+(a+o).strftime("%Y-%m-%d %H:%M:%S")))
     timer = threading.Timer(60, job)
     timer.start()
 
