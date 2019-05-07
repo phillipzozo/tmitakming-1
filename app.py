@@ -1,3 +1,4 @@
+from datetime import datetime, timezone, timedelta
 from flask import Flask, request, abort
 
 from linebot import (
@@ -18,7 +19,6 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 import time
-import datetime
 
 #取得時間後加8的偏移 UTC
 dt = datetime.utcnow()
