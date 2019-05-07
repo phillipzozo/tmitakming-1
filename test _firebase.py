@@ -16,6 +16,7 @@ db = firestore.client()
 def query_Get():
     # 初始化firestore
 
+    
     #Get Collection
     doc_ref = db.collection('Detector')
     localtime = time.asctime(time.localtime(time.time()))
@@ -33,4 +34,19 @@ def query_Get():
         print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
         # print(temp)
 
-query_Get()
+#query_Get()
+
+
+path = "Detector/gas"
+path_root = "Detector"
+doc_ref = db.document(path)
+collection_ref = db.collection(path_root)
+docs = collection_ref.get()
+for doc in docs:
+    print("文件內容：{}".format(doc.to_dict()))
+try:
+    doc = doc_ref.get()
+    # 透過 to_dict()將文件轉為dictionary
+    print("文件內容為：{}".format(doc.to_dict()))
+except:
+    print("指定文件的路徑{}不存在，請檢查路徑是否正確".format(path))
