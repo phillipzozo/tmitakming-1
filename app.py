@@ -182,6 +182,17 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     
 
+#傳圖測試
+#圖片訊息
+# ImageSendMessage物件中的輸入
+# original_content_url 以及 preview_image_url都要寫才不會報錯。
+#輸入的網址要是一個圖片，應該說只能是一個圖片，不然不會報錯但是傳過去是灰色不能用的圖
+image_url = "https://192.192.140.141/topic/2.jpg"
+try:
+    line_bot_api.push_message(to, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
+except LineBotApiError as e:
+    # error handle
+    raise e
 
 
 
