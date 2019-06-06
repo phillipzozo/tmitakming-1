@@ -182,6 +182,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     
 
+from b import tk
 #傳圖測試
 #圖片訊息
 # ImageSendMessage物件中的輸入
@@ -191,7 +192,9 @@ def handle_message(event):
 image_url = "https://192.192.140.141/topic/2.jpg"
 try:
     line_bot_api.push_message(to, ImageSendMessage(original_content_url=image_url, preview_image_url=image_url))
-    
+    line_bot_api.push_message('C18d381b48c034f3de0af914fe1fe524f', TextSendMessage(
+        text=tk()))
+
 except LineBotApiError as e:
     # error handle
     raise e
