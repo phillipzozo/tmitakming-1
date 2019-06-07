@@ -3,7 +3,7 @@ from google.cloud.firestore_v1 import ArrayRemove, ArrayUnion
 import google.cloud.exceptions
 
 #test = {'id': cc, 'CO2': 1100, 'Ethanol': 0.4, 'CO': 200, 'PM2.5': 299,
- #       'temperture': 30, 'humidity': 50, 'timestamp': (a+o).strftime("%Y-%m-%d %H:%M:%S")}
+#       'temperture': 30, 'humidity': 50, 'timestamp': (a+o).strftime("%Y-%m-%d %H:%M:%S")}
 
 #氣體偵測模塊
 class Gas_Sensing(object):
